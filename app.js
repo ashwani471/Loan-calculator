@@ -1,4 +1,19 @@
-document.getElementById('loan-form').addEventListener('submit' , calculateResult);
+// document.getElementById('loan-form').addEventListener('submit' , calculateResult);
+
+document.getElementById('loan-form').addEventListener('submit' , function(e){
+
+    document.getElementById('results').style.display = 'none';
+
+    document.getElementById('loading').style.display = 'block';
+
+    setTimeout(calculateResult , 2000);
+
+    e.preventDefault();
+});
+
+function showLoader(){
+    document.getElementById('loading').style.display = 'bloack';
+}
 
 function checkAmountValue(val){
     if(val>1000000 && val<0){
@@ -51,10 +66,7 @@ function calculateResult(e){
     // console.log(typeof(year));
 
     let totalAmount = amount;
-    // for(let i =  0 ; i<parseInt(year.value) ; i++ ){
-    //     totalAmount += parseInt(totalAmount*parseInt(interest.value))/100;
-    //     // console.log(typeof(year.value));
-    // }
+    
     for(let i =  0 ; i<year ; i++ ){
         totalAmount += (totalAmount*(interest))/100;
         // console.log(typeof(year.value));
@@ -70,6 +82,10 @@ function calculateResult(e){
     const ExtraPay = document.getElementById('total-interest');
     ExtraPay.value = (totalAmount - amount).toFixed(2);
 
-    e.preventDefault();
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
+
+    
+    // e.preventDefault();
 
 }
